@@ -1,0 +1,87 @@
+.container {
+    width: 230px;
+    min-height: calc(100% - 50px);
+    position: relative;
+    padding: 40px 10px;
+    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.formContainer {
+    width: 100%;
+    padding: 5px;
+    position: relative;
+    background-color: #00DBDE;
+    background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+    border-radius: 8px;
+}
+
+.formContainer::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    min-width: calc(100% - 8px);
+    min-height: calc(100% - 8px);
+    background-image: linear-gradient(174.2deg, rgba(255, 244, 228, 1) 7.1%, rgba(240, 246, 238, 1) 67.4%);
+    border-radius: 8px;
+    z-index: 0;
+}
+
+.formContainer h1 {
+    position: relative;
+    text-align: center;
+    font-size: 25px;
+    color: purple;
+    text-shadow: 1px 2px 1px palevioletred;
+}
+
+form {
+    width: 100%;
+    padding: 10px 20px 20px;
+    position: relative;
+    z-index: 1;
+    border-radius: 8px;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    height: 13px;
+    width: 100%;
+    background-color: transparent;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 12px;
+    cursor: pointer;
+    background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(255, 197, 118, 1) 0%, rgba(254, 106, 103, 1) 47.7%, rgba(240, 23, 23, 1) 92.3%);
+    border-radius: 5px;
+    border: 1px solid rgb(218, 4, 218);
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 23px;
+    background: purple;
+    border: 2px solid rgb(198, 1, 198);
+    cursor: pointer;
+    margin-top: -5px;
+}
+
+.checkBox_container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: purple;
+}
+
+input[type=checkbox] {
+    height: 30px;
+    width: 30px;
+}

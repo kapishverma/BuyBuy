@@ -1,0 +1,9 @@
+.MyOrdersPage {
+    width: 100% !important;
+    height: calc(100% - 80px) !important;
+    overflow-y: scroll;
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
