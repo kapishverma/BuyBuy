@@ -5,8 +5,10 @@
     overflow-y: scroll;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    align-content: flex-start; /* Align items to the beginning of the container */
+    margin-top: 20px; /* Add some top margin for spacing between items */
 }
+
 
 .inputField {
     height: 50px;
