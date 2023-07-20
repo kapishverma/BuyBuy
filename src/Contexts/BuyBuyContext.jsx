@@ -36,6 +36,9 @@ export default function BuyBuyContext(props) {
     }, [])
 
 
+    //SignUp form that allows new users to register using their email address and a password. When a user
+    //submits the form, validate the email address and password provided by the user, then pass them to
+    //the createUserWithEmailAndPassword method: then, at same time i update new user's displayName
 
     const signUp = async (name, email, password) => {
         return new Promise(async (resolve, reject) => {
@@ -55,7 +58,8 @@ export default function BuyBuyContext(props) {
         })
     }
 
-
+    //SignIn form that allows existing users to sign in using their email address and password. When a user
+    //completes the form, call the signInWithEmailAndPassword method:
 
     const signIn = async (email, password) => {
         return await signInWithEmailAndPassword(auth, email, password)
@@ -73,12 +77,18 @@ export default function BuyBuyContext(props) {
             });
     }
 
+    //signOut
     const logOut = async () => {
         await signOut(auth);
         localStorage.removeItem("userUID");
         setUserUID(null);
     }
 
+    //# Filtering Results
+
+    //## Take User Filtring preference from input Type text(string or number);
+    //if you type any number it will search product with price less then or equal to that number,
+    //if you type any text then it will search on the basic of product name and its category
 
 
     const handleKeyWordFilter = async (e) => {
@@ -91,6 +101,8 @@ export default function BuyBuyContext(props) {
         setProducts(newFilteredProducts);
     }
 
+    //## Take User Filtring preference from input Type range and checkBox
+    //Here i take user input, then filter and update products result on the basic of user preference, such as price, type
 
     const filterProducts = async (e) => {
         const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
@@ -123,6 +135,10 @@ export default function BuyBuyContext(props) {
         }
     };
 
+    //## Filter Product on the basic of price / category
+    //this function `updateSetProducts` is a helper function it will used by  `filterProducts` and`handleKeyWordFilter`,
+    //here i fiest fetch product on the basic of price and category, then filter(compair) them locally on the basic of
+    //category selected by user
 
     async function updateSetProducts(options, priceRange) {
         let filteredProducts = [];
@@ -154,6 +170,9 @@ export default function BuyBuyContext(props) {
         return filteredProducts;
     }
 
+    //# Add Item in Cart
+    //here i add full data of product to user's cart when he add something to its cart, with an extra key-value pair
+    //qty:1, which denotes the number of quantity of particular product,you can increase quantity from cart page.
 
     const addItem = async (item) => {
         if (!userUID) {
@@ -180,6 +199,7 @@ export default function BuyBuyContext(props) {
         }
     }
 
+    //## Increase Quantity of a Particular Product, in Cart
 
     const increaseQuantity = async (itemRef, qty) => {
         if (qty === 1) {
@@ -191,17 +211,22 @@ export default function BuyBuyContext(props) {
         }
     }
 
+    //## Decrease Quantity of a Particular Product, in Cart
+
     const decreaseQuantity = async (itemRef, qty) => {
         await updateDoc(doc(db, "User", userUID, "MyCart", itemRef), {
             qty: qty + 1
         });
     }
 
+    //## Remove Particular Product from Cart
+
     const removeFromCart = async (itemRef) => {
         await deleteDoc(doc(db, "User", userUID, "MyCart", itemRef));
     }
 
-
+    //# Purchase all item in Cart
+    //here i delete items one by one from user's cart and then add it to its MyOrder collection
     const purchase = async () => {
 
         const querySnapshot = await getDocs(collection(db, "User", userUID, "MyCart"));
